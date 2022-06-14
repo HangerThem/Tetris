@@ -9,12 +9,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-#game {
+.game {
   border: 1px solid #ddd;
   background-size: 32px 32px;
   background-image:
     linear-gradient(to right, #ffffff30  1px, transparent 1px),
     linear-gradient(to bottom, #ffffff30  1px, transparent 1px);
+}
+
+.info-container {
+  margin-bottom: 2.5rem;
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }

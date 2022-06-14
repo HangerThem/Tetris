@@ -66,12 +66,16 @@ function placeTetromino() {
       }
     }
   }
-  for (let row = playfield.length - 1; row >= 0; ) {
+  for (let row = playfield.length - 1; row >= 0;) {
     if (playfield[row].every((cell) => !!cell)) {
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
           playfield[r][c] = playfield[r - 1][c];
         }
+      }
+      document.querySelector('[data-points]').innerHTML = Number(document.querySelector('[data-points]').innerHTML) + 1000;
+      if (Number(document.querySelector('[data-points]').innerHTML) % 10000 === 0) {
+        document.querySelector('[data-level]').innerHTML = Number(document.querySelector('[data-level]').innerHTML) + 1;
       }
     } else {
       row--;
@@ -166,6 +170,7 @@ let rAF = null;
 let gameOver = false;
 
 function loop() {
+  const speed = 35 - (Math.floor(Number(document.querySelector('[data-points]').innerHTML) / 10000) * 5);
   rAF = requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let row = 0; row < 20; row++) {
@@ -179,7 +184,7 @@ function loop() {
   }
 
   if (tetromino) {
-    if (++count > 35) {
+    if (++count > speed) {
       tetromino.row++;
       count = 0;
 
