@@ -66,16 +66,21 @@ function placeTetromino() {
       }
     }
   }
-  for (let row = playfield.length - 1; row >= 0;) {
+  for (let row = playfield.length - 1; row >= 0; ) {
     if (playfield[row].every((cell) => !!cell)) {
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
           playfield[r][c] = playfield[r - 1][c];
         }
       }
-      document.querySelector('[data-points]').innerHTML = Number(document.querySelector('[data-points]').innerHTML) + 1000;
-      if (Number(document.querySelector('[data-points]').innerHTML) % 10000 === 0) {
-        document.querySelector('[data-level]').innerHTML = Number(document.querySelector('[data-level]').innerHTML) + 1;
+      document.querySelector("[data-points]").innerHTML =
+        Number(document.querySelector("[data-points]").innerHTML) + 1000;
+      if (
+        Number(document.querySelector("[data-points]").innerHTML) % 10000 ===
+        0
+      ) {
+        document.querySelector("[data-level]").innerHTML =
+          Number(document.querySelector("[data-level]").innerHTML) + 1;
       }
     } else {
       row--;
@@ -91,14 +96,20 @@ function showGameOver() {
 
   context.fillStyle = "black";
   context.globalAlpha = 0.75;
-  context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+  context.fillRect(0, canvas.height / 2 - 62.5, canvas.width, 125.5);
 
   context.globalAlpha = 1;
   context.fillStyle = "white";
   context.font = "35px monospace";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+  context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 25);
+  context.font = "25px monospace";
+  context.fillText(
+    "Reload for restart",
+    canvas.width / 2,
+    canvas.height / 2 + 25
+  );
 }
 
 const canvas = document.getElementById("game");
@@ -170,7 +181,12 @@ let rAF = null;
 let gameOver = false;
 
 function loop() {
-  const speed = 35 - (Math.floor(Number(document.querySelector('[data-points]').innerHTML) / 10000) * 5);
+  const speed =
+    35 -
+    Math.floor(
+      Number(document.querySelector("[data-points]").innerHTML) / 10000
+    ) *
+      5;
   rAF = requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let row = 0; row < 20; row++) {
